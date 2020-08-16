@@ -1,0 +1,28 @@
+<resources>
+
+        <string name="title_home"><b>Home</b></string>
+        <string name="app_name">PocketKnife</string>
+        <!--New feature support in the app as needed i.e. buttons to enable feature such as Map
+            and tests such as Appcenter Crash -->
+
+        <!--        Maps feature needed support in the app -->
+        <string name="title_activity_maps">Map</string>
+        <string name="title_map_button">Map\nButton</string>
+        <string name="button_map_clicked">Map Clicked</string>
+
+        <!--    Crash  test in the app only -->
+        <string name="title_crash_button">Crash Button</string>
+        <string name="button_crash_text">Crash\nTest</string>
+        <string name="button_crashing_clicked">Crash has been forced</string>
+        <string name = "crash_oops">Oops! Sorry about that crash!</string>
+        <string name="crash_detected">Crashes.hasCrashedInLastSession()</string>
+
+        <!--    Life Cycle feature in the app only -->
+        <string name="onStop">\onStop detected</string>
+        <string name="onRestart">\nonRestart detected</string>
+        <string name="onResume">\nonResume detected</string>
+        <string name="onStart">\nonStart detected</string>
+        <string name="onPause">\nonPause detected</string>
+        <string name="onDestroy">\nonDestroy detected</string>
+
+</resources>
