@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+// PocketKnife Libraries
 import com.example.library_getbluetoothstatus.getBlueToothStatus
 import com.example.library_getlocationstatus.getLocationStatus
 import com.example.library_getmacaddress.getMACAddress
@@ -14,6 +15,7 @@ import com.example.library_getnetworkstatus.getNetworkStatus
 import com.example.library_isitrooted.isItRooted
 import com.example.library_map.MapsActivity
 import com.example.library_withpermissions.methodWithPermissions
+// Appcenter Libraries
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.Flags
 import com.microsoft.appcenter.analytics.Analytics
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // PocketKnife Core Features
         methodWithPermissions(this)
 
         textMessage.setText(getNetworkStatus(this, builder))
@@ -65,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         textMessage.setText(getMACAddress(this, builder))
         textMessage.setText(isItRooted(this, builder))
 
+        // Test crash feature
         crash_button.setOnClickListener {
             Analytics.trackEvent(
                 getString(R.string.button_crashing_clicked),
@@ -73,13 +77,11 @@ class MainActivity : AppCompatActivity() {
             )
             Crashes.generateTestCrash()
         }
-//        Map feature
 
+        // Map feature
         button.setOnClickListener {
             Analytics.trackEvent(getString(R.string.button_map_clicked), properties, Flags.NORMAL);
-//            val intent: Intent = Intent("com.example.library_map.MapsActivity")
             val intent: Intent = Intent(this, MapsActivity::class.java).apply {}
-//            MapsActivity()
             try {
                 startActivity(intent)
             } catch (e: Exception) {
@@ -88,40 +90,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //    Android Lifecycle overides
     override fun onStop() {
         super.onStop()
-        Analytics.trackEvent(getString(R.string.onStop), properties, Flags.NORMAL);
-        Toast.makeText(this, getString(R.string.onStop), Toast.LENGTH_LONG)
+        Analytics.trackEvent(getString(R.string.onStop), properties, Flags.NORMAL)
+        Toast.makeText(this, getString(R.string.onStop), Toast.LENGTH_LONG).show()
     }
-
     override fun onRestart() {
         super.onRestart()
-        Analytics.trackEvent(getString(R.string.onRestart), properties, Flags.NORMAL);
-        Toast.makeText(this, getString(R.string.onRestart), Toast.LENGTH_LONG)
+        Analytics.trackEvent(getString(R.string.onRestart), properties, Flags.NORMAL)
+        Toast.makeText(this, getString(R.string.onRestart), Toast.LENGTH_LONG).show()
     }
-
     override fun onResume() {
         super.onResume()
-        Analytics.trackEvent(getString(R.string.onResume), properties, Flags.NORMAL);
-        Toast.makeText(this, getString(R.string.onResume), Toast.LENGTH_LONG)
+        Analytics.trackEvent(getString(R.string.onResume), properties, Flags.NORMAL)
+        Toast.makeText(this, getString(R.string.onResume), Toast.LENGTH_LONG).show()
     }
-
     override fun onStart() {
         super.onStart()
-        Analytics.trackEvent(getString(R.string.onStart), properties, Flags.NORMAL);
+        Analytics.trackEvent(getString(R.string.onStart), properties, Flags.NORMAL)
         Toast.makeText(this, getString(R.string.onStart), Toast.LENGTH_LONG).show()
     }
-
     override fun onPause() {
         super.onPause()
-        Analytics.trackEvent(getString(R.string.onPause), properties, Flags.NORMAL);
-        Toast.makeText(this, getString(R.string.onPause), Toast.LENGTH_LONG)
-
+        Analytics.trackEvent(getString(R.string.onPause), properties, Flags.NORMAL)
+        Toast.makeText(this, getString(R.string.onPause), Toast.LENGTH_LONG).show()
     }
-
     override fun onDestroy() {
         super.onDestroy()
-        Analytics.trackEvent(getString(R.string.onDestroy), properties, Flags.NORMAL);
-        Toast.makeText(this, getString(R.string.onDestroy), Toast.LENGTH_LONG)
+        Analytics.trackEvent(getString(R.string.onDestroy), properties, Flags.NORMAL)
+        Toast.makeText(this, getString(R.string.onDestroy), Toast.LENGTH_LONG).show()
     }
 }
