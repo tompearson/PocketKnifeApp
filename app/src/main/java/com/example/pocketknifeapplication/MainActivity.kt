@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         textMessage.setTextColor(Color.BLACK)
 
         AppCenter.start(
-            application, "d22cdd64-9c51-46aa-97e4-2adf0758f0a6",
+            application, "48d1d828-5cf7-41c3-a7eb-3d20975e2290",
             Analytics::class.java, Crashes::class.java, Distribute::class.java
         )
         val future = Crashes.hasCrashedInLastSession()
