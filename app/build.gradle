@@ -21,60 +21,68 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        // Fetch keys required for app
+        // Ready to load keys from app level folder in file store.properties
+        // Note: google_maps_key is not the same value as places_api_key
+        // But google _maps_key must be in the app level manifest
         def storeKeysFile = file('store.properties')
         Properties storeProps = new Properties()
         def google_maps_key_ = ""
+        def places_api_key_ = ""
         if (storeKeysFile.canRead()) {
+            // Load keys (this file is intentionally out of the project space
             storeProps.load(new FileInputStream(storeKeysFile))
             google_maps_key_ = storeProps['google_maps_key'].toString()
+            places_api_key_ = storeProps['places_api_key'].toString()
         } else {
             throw new GradleException("Could not read storeKeysFile.properties!")
         }
-        manifestPlaceholders = [google_maps_key: "${google_maps_key_}"]
+        //          resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "") TPD look at this for future
+        manifestPlaceholders = [
+                google_maps_key: "${google_maps_key_}",
+                places_api_key : "${places_api_key_}"]
         buildConfigField "String", "google_maps_key", "\"${google_maps_key_}\""
+        buildConfigField "String", "places_api_key", "\"${places_api_key_}\""
     }
 
-    def theAppName = "PocketKnife"
+        def theAppName = "PocketKnife"
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [appName: "${theAppName} release"]
-            signingConfig signingConfigs.release
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                manifestPlaceholders = [appName: "${theAppName} release"]
+                signingConfig signingConfigs.release
+            }
+            debug {
+                debuggable true
+                manifestPlaceholders = [appName: "${theAppName} debug"]
+                signingConfig signingConfigs.debug
+            }
         }
-        debug {
-            debuggable true
-            manifestPlaceholders = [appName: "${theAppName} debug"]
-            signingConfig signingConfigs.debug
-        }
-    }
-    dependencies {
-        implementation fileTree(dir: "libs", include: ["*.jar"])
-        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-        implementation 'androidx.core:core-ktx:1.3.1'
-        implementation 'androidx.appcompat:appcompat:1.2.0'
-        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-        testImplementation 'junit:junit:4.13'
-        androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-        androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-        // PocketKnife Libraries
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_WithPermissions:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getLocationStatus:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getBlueToothStatus:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getMACAddress:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getNetworkStatus:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_isItRooted:dev-SNAPSHOT'
-        implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_map:dev-SNAPSHOT'
+        dependencies {
+            implementation fileTree(dir: "libs", include: ["*.jar"])
+            implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+            implementation 'androidx.core:core-ktx:1.3.1'
+            implementation 'androidx.appcompat:appcompat:1.2.0'
+            implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+            testImplementation 'junit:junit:4.13'
+            androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+            androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+            // PocketKnife Libraries
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_WithPermissions:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getLocationStatus:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getBlueToothStatus:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getMACAddress:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getNetworkStatus:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_isItRooted:dev-SNAPSHOT'
+            implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_map:dev-SNAPSHOT'
 
 //      App Center
-        def appCenterSdkVersion = '3.2.2'
-        implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
-        implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
-        implementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
-
-
+            def appCenterSdkVersion = '3.2.2'
+            implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+            implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
+            implementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
+        }
     }
-}
+
 

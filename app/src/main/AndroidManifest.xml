@@ -25,6 +25,7 @@
                 android:value="com.example.pocketknifeapplication.MainActivity" />
         </activity>
 
+        <!--    This google_maps_key API_KEY must be at the app level. It won't work in the library module -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${google_maps_key}" />
