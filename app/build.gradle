@@ -40,11 +40,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+//    https://jitpack.io/#tompearson/PocketKnifeLibraryBuild/v2.0.1  exists but from maven { url 'https://jitpack.io' }
+    // but does not build  Could not resolve com.github.tompearson.PocketKnifeLibraryBuild:Library_WithPermissions:v2.0.1.
+//    implementation 'com.github.tompearson.PocketKnifeLibraryBuild:Library_WithPermissions:v2.0.1'
     implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_WithPermissions:dev-SNAPSHOT'
     implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getLocationStatus:dev-SNAPSHOT'
     implementation 'com.github.tompearson.PocketKnife_Library:PocketKnifeLibrary-Library_getBlueToothStatus:dev-SNAPSHOT'
@@ -68,8 +71,8 @@ dependencies {
 //    implementation fileTree(dir: 'C:\\Users\\Tom\\.m2\\repository\\com\\library\\tappyplay\\pocketknife\\PocketKnifeLibrary-Library_getNetworkStatus', include: ['*.aar', '*.jar'], exclude: [])
 //    implementation fileTree(dir: 'C:\\Users\\Tom\\.m2\\repository\\com\\library\\tappyplay\\pocketknife\\PocketKnifeLibrary-Library_isItRooted', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 //      App Center
     def appCenterSdkVersion = '3.2.2'
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"

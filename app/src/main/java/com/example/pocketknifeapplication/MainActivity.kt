@@ -77,8 +77,9 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             Analytics.trackEvent(getString(R.string.button_map_clicked), properties, Flags.NORMAL);
-//            val intent: Intent = Intent("com.example.library_map.MapsActivity")
+//            val intent: Intent = Intent("com.example.library_map.MapsActivity")// no work
             val intent: Intent = Intent(this, MapsActivity::class.java).apply {}
+
 //            MapsActivity()
             try {
                 startActivity(intent)
